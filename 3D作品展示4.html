@@ -1,0 +1,98 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="智能社 - zhinengshe.com" />
+<meta name="copyright" content="智能社 - zhinengshe.com" />
+<meta name="description" content="智能社是一家专注于web前端开发技术的公司，目前主要提供JavaScript培训和HTML5培训两项服务，同时还推出了大量javascript基础知识教程，智能课堂为你带来全新的学习方法和快乐的学习体验。" />
+<title>智能社— http://www.zhinengshe.com</title>
+<style>
+*{ margin:0; padding:0; list-style:none; }
+ul{ position:relative; margin:100px auto; width:300px; height:300px; transform-style:preserve-3d; perspective:800px; }
+li{ position:absolute; left:0; top:0; width:100%; height:100%; background:#399; text-align:center; line-height:300px; border:1px solid red; font-size:50px; color:#fff; font-weight:bold; opacity:0; transition:1s all ease; }
+.l2{ transform:translateX(-240px) rotateY(40deg); }
+.l1{ opacity:1; transform:translateX(-200px) rotateY(40deg); }
+.cur{ opacity:1; }
+.r1{ opacity:1; transform:translateX(200px) rotateY(-40deg); }
+.r2{ transform:translateX(240px) rotateY(-40deg); }
+</style>
+<script>
+window.onload=function (){
+	var oPrev=document.getElementById('prev');
+	var oNext=document.getElementById('next');
+	var oBox=document.getElementById('box');
+	var aLi=oBox.children;
+	var bOk=false;
+	
+	var aClass=[];
+	for(var i=0; i<aLi.length; i++){
+		aClass.push(aLi[i].className);
+	}
+	//console.log(aClass);
+	oPrev.onclick=function (){
+		if(bOk)return;
+		bOk=true;
+		aClass.push(aClass.shift());
+		changeClass();
+	};
+	oNext.onclick=function (){
+		if(bOk)return;
+		bOk=true;
+		aClass.unshift(aClass.pop());
+		changeClass();
+	};
+	
+	function changeClass(){
+		for(var i=0; i<aClass.length; i++){
+			aLi[i].className=aClass[i];
+		}
+		//运动结束
+		var oCur=document.querySelector('.cur');
+		
+		function tranEnd(){
+			oCur.removeEventListener('transitionend',tranEnd,false);
+			bOk=false;
+		}
+		oCur.addEventListener('transitionend',tranEnd,false);
+	}
+};
+</script>
+</head>
+
+<body>
+	<input type="button" value="←" id="prev" />
+	<input type="button" value="→" id="next" />
+	<ul id="box">
+    	<li class="l2">0</li>
+    	<li class="l1">1</li>
+    	<li class="cur">2</li>
+    	<li class="r1">3</li>
+    	<li class="r2">4</li>
+    	<li>5</li>
+    	<li>6</li>
+    	<li>7</li>
+    	<li>8</li>
+    	<li>9</li>
+    	<li>10</li>
+    </ul>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
